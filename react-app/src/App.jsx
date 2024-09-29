@@ -5,6 +5,23 @@ import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [message, setMessage] = useState('')
+
+  const springbootApiPort = import.meta.env.VITE_SPRINGBOOT_HOST_PORT;    // springboot port
+  const apiUrl = `http://localhost:${springbootApiPort}/api/hello`;       // api 호출 URL
+
+  const callApi = async () => {
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.text();
+      setMessage(data);
+    } catch (error) {
+      setMessage('Error: ' + error.message);
+    }
+  };
 
   return (
     <>
@@ -21,6 +38,8 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
+        <button onClick={callApi}>Call API</button>
+        <p>{message}</p>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
