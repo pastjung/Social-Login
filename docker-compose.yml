@@ -1,0 +1,23 @@
+services:
+  react-app:
+    build:
+      context: ./react-app
+      # dockerfile : Dockerfile       # 배포용 도커 파일
+      dockerfile : dockerfile.dev   # 개발용 도커 파일
+    image: 'react-image:latest'
+    container_name: 'react-container'
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./react-app/src:/react-app/src
+    ports:
+      - ${REACT_HOST_PORT}:${REACT_SERVER_PORT}
+    env_file:
+      - ./react-app/.env
+    networks:
+      - inha
+
+networks:
+  inha:
+    name: inha
