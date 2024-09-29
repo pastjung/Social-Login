@@ -11,10 +11,32 @@ services:
     tty: true
     volumes:
       - ./react-app/src:/react-app/src
+    depends_on:
+      - springboot-app
     ports:
       - ${REACT_HOST_PORT}:${REACT_SERVER_PORT}
     env_file:
       - ./react-app/.env
+    networks:
+      - inha
+
+  springboot-app:
+    build:
+      context: ./springboot-app
+      # dockerfile : Dockerfile         # 배포용 도커 파일
+      dockerfile : ./dockerfile.dev   # 개발용 도커 파일
+    image: 'springboot-image:latest'
+    container_name: 'springboot-container'
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./springboot-app:/springboot-app
+      - ./springboot-app/.env:/.env
+    ports:
+      - ${SPRINGBOOT_HOST_PORT}:${SPRINGBOOT_SERVER_PORT}
+    env_file:
+      - ./springboot-app/.env
     networks:
       - inha
 

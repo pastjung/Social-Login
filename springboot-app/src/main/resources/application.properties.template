@@ -1,1 +1,4 @@
 spring.application.name=springboot-app
+
+# .env(SPRINGBOOT_SERVER_PORT)
+server.port=${SPRINGBOOT_SERVER_PORT}

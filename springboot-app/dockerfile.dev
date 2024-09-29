@@ -1,0 +1,21 @@
+# 1. Gradle을 사용하는 기본 이미지
+FROM gradle:8.10.0-jdk17 AS build
+
+# 2. 작업 디렉토리 설정
+WORKDIR /springboot-app
+
+# 3. Gradle 캐시를 위해 build.gradle 및 settings.gradle 파일을 먼저 복사
+COPY build.gradle ./
+COPY settings.gradle ./
+
+# 4. 의존성 설치
+RUN gradle dependencies --no-daemon
+
+# 5. 나머지 소스 코드 복사
+COPY . .
+
+# 6. 애플리케이션 빌드 (테스트를 건너뛰고)
+RUN gradle build -x test --no-daemon
+
+# 7. 애플리케이션 실행
+CMD ["gradle", "bootRun", "--no-daemon"]
