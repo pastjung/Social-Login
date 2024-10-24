@@ -3,6 +3,7 @@ package com.inha.springbootapp.domain.oauth.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.inha.springbootapp.domain.oauth.dto.SocialLoginUserDto;
 import com.inha.springbootapp.domain.oauth.util.KakaoAuthUtil;
+import com.inha.springbootapp.domain.oauth.util.NaverAuthUtil;
 import com.inha.springbootapp.domain.user.entity.User;
 import com.inha.springbootapp.domain.user.repository.UserRepository;
 import com.inha.springbootapp.global.util.CookieUtils;
@@ -19,6 +20,7 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final KakaoAuthUtil kakaoAuthUtil;
+    private final NaverAuthUtil naverAuthUtil;
 
     public String callback(String loginType, String code, HttpServletResponse response) throws JsonProcessingException {
         log.info("callback start!");
