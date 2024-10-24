@@ -1,4 +1,4 @@
-package com.inha.springbootapp;
+package com.inha.springbootapp.domain.ping;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
