@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: springboot-app
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb?serverTimezone=Asia/Seoul
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: false
+  h2:
+    console:
+      enabled: true       # h2-console 사용 여부
+      path: /h2-console   # h2-console 사용 경로
+jwt:
+  config:
+    import: optional:file:.env[.properties]
+  secret:
+    key: {JWT_SECRET_KEY}
