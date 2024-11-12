@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchUserInfo } from '../apis/fetchUserInfo';
+import { requestAccessTokenFromRefreshToken } from '../apis/requestAccessTokenFromRefreshToken';
 import PingSpringboot from '../buttons/PingAccessToken';
 import Logout from '../buttons/Logout';
 import accessToken from '../accessToken';
@@ -13,7 +14,8 @@ const HomePage = () => {
 
         const callAPI = async () => {
             try {
-                const data = await fetchUserInfo(token);  // 분리된 함수 호출
+                const userToken = token || await requestAccessTokenFromRefreshToken();;
+                const data = await fetchUserInfo(userToken);
                 setUserInfo(data);
             } catch (error) {
                 console.error(error);
