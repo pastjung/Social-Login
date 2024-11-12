@@ -1,0 +1,31 @@
+# Node.js 의존성 파일 및 빌드 결과물 제외
+node_modules
+dist
+*.log
+
+# .git 관련 파일 제외
+.git
+.gitignore
+
+# OS 관련 파일 제외 (Windows에서 생성되는 파일들)
+.DS_Store
+Thumbs.db
+
+# 환경 변수 파일
+.env
+
+# 테스트 및 개발 관련 파일 제외
+tests
+test
+coverage
+
+# 빌드 후 생성되는 임시 파일 및 캐시 제외
+.vite
+.vscode
+
+# 패키지 관리 도구가 생성하는 캐시 파일 제외
+package-lock.json
+yarn.lock
+
+# Dockerfile 빌드 시 필요한 .dockerignore 파일 제외
+.dockerignore

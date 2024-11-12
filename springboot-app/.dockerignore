@@ -1,0 +1,31 @@
+# Maven 또는 Gradle 빌드 결과물
+target
+build
+
+# IDE 관련 파일
+.idea
+*.iml
+
+# 로컬 개발 환경에서 사용하는 설정 파일들
+*.log
+*.swp
+*.bak
+
+# .git 관련 파일 제외
+.git
+.gitignore
+
+# OS 관련 파일 (Windows/macOS)
+.DS_Store
+Thumbs.db
+
+# 환경 변수 파일
+.env
+
+# 테스트 및 개발 관련 파일 제외
+tests
+test
+coverage
+
+# Dockerfile 빌드 시 필요한 .dockerignore 파일 제외
+.dockerignore
