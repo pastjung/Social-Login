@@ -1,10 +1,10 @@
 # Social-Login
 
-> Initial written at october 12, 2024 <br/>
-> last updated at: october 24, 2024
+> Initial written at October 12, 2024 <br/>
+> last updated at: November 12, 2024
 
 
-## Current: ver. 1.0.1<br/>
+## Current: ver. 1.0.2<br/>
 >* ver 1.0.0.
 >   * Init: 프로젝트 세팅 ( React + Spring Boot )
 >   * CORS 설정
@@ -54,7 +54,7 @@
 
 # 4. 디렉토리 및 파일 설명
 ```
-/Project-Template
+📦
 ├─ .env.template
 ├─ .gitattributes
 ├─ .gitignore
@@ -63,6 +63,7 @@
 │  ├─ PULL_REQUEST_TEMPLATE.md
 │  └─ README.md
 ├─ react-app
+│  ├─ .dockerignore
 │  ├─ .env.template
 │  ├─ .gitignore
 │  ├─ README.md
@@ -80,11 +81,27 @@
 │  │  │  └─ react.svg
 │  │  ├─ index.css
 │  │  ├─ main.jsx
-│  │  └─ oauth
-│  │     ├─ HomePage.jsx
-│  │     └─ LoginPage.jsx
+│  │  ├─ oauth
+│  │  │  ├─ accessToken.js
+│  │  │  ├─ apis
+│  │  │  │  ├─ fetchUserInfo.js
+│  │  │  │  ├─ logout.js
+│  │  │  │  └─ requestAccessTokenFromRefreshToken.js
+│  │  │  ├─ buttons
+│  │  │  │  ├─ Logout.jsx
+│  │  │  │  └─ PingAccessToken.jsx
+│  │  │  └─ pages
+│  │  │     ├─ ConnectPage.jsx
+│  │  │     ├─ HomePage.jsx
+│  │  │     └─ LoginPage.jsx
+│  │  └─ ping
+│  │     ├─ apis
+│  │     │  └─ pingSpringBoot.js
+│  │     └─ pages
+│  │        └─ PingPage.jsx
 │  └─ vite.config.js
 └─ springboot-app
+   ├─ .dockerignore
    ├─ .env.template
    ├─ .gitignore
    ├─ build.gradle
