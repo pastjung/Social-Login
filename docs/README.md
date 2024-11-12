@@ -15,6 +15,7 @@
 >   * 소셜로그인 로직 수정: `/connect` 연결 페이지를 사용해 accessToken을 메모리에 저장
 >       * `home`의 URL에 붙어있던 accessToken 쿼리 스트링 값 제거
 >   * 소셜로그인 로그아웃 기능 추가
+>   * 새로고침시 refreshToken을 사용해 accessToken 재발급 로직 추가
 
 # 1. 프로그램 (프로젝트) 설명
 
