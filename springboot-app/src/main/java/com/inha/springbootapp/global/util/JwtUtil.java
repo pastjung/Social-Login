@@ -22,7 +22,7 @@ public class JwtUtil {
     private String secretKey;
 
     public static final String BEARER_PREFIX = "Bearer ";   // Token 식별자
-    private static Key key;                                        // secretKey 를 암호화해서 사용할 key
+    private static Key key;                                 // secretKey 를 암호화해서 사용할 key
     private static final SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256; // secretKey 를 암호화할 알고리즘
 
     @PostConstruct  // 런타임에서 Bean 객체가 생성될 때 수행되도록 설정
@@ -48,6 +48,13 @@ public class JwtUtil {
     }
 
     // 인증(Authentication) : JWT 토큰 생성 (카카오 로그인)
+    /*
+        setSubject() : JWT 에 대한 제목
+        setExpiration() : JWT 만료기한 지정 . 파라미터 타입은 java.util.Date
+        setIssuedAt() : JWT 발행 일자 . 파라미터 타입은 java.util.Date
+        signWith() : 서명을 위한 Key (java.security.Key) 객체를 설정
+        compact() : JWT 생성하고 직렬화.
+     */
     public static String createJWT(User user, int TOKEN_TIME) {
         Date date = new Date();
 
@@ -61,13 +68,7 @@ public class JwtUtil {
                         .compact();
     }
 
-    // setSubject() : JWT 에 대한 제목
-    // setExpiration() : JWT 만료기한 지정 . 파라미터 타입은 java.util.Date
-    // setIssuedAt() : JWT 발행 일자 . 파라미터 타입은 java.util.Date
-    // signWith() : 서명을 위한 Key (java.security.Key) 객체를 설정
-    // compact() : JWT 생성하고 직렬화.
-
-    // setClaims() : JWT 에 포함시킬 Custom Claims 를 추가 (주로 인증된 사용자 정보)
+    // setClaims() 사용 방법: JWT 에 포함시킬 Custom Claims 를 추가 (주로 인증된 사용자 정보)
     /* ex. Claim 생성 후 사용
         Claims claims = Jwts.claims().setSubject(user.getEmail());
         claims.put("userId", user.getUserId());
