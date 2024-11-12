@@ -9,6 +9,7 @@ import com.inha.springbootapp.domain.user.entity.User;
 import com.inha.springbootapp.domain.user.repository.UserRepository;
 import com.inha.springbootapp.global.util.CookieUtils;
 import com.inha.springbootapp.global.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class AuthService {
     private final KakaoAuthUtil kakaoAuthUtil;
     private final NaverAuthUtil naverAuthUtil;
     private final GoogleAuthUtil googleAuthUtil;
+
+    // 토큰 만료 시간
+    private final int ACCESS_TOKEN_TIME = 60 * 60 * 1000;         // 60분
+    private final int REFRESH_TOKEN_TIME = 24 * 60 * 60 * 1000;   // 1일
 
     public String callback(String loginType, String code, HttpServletResponse response) throws JsonProcessingException {
 
@@ -69,15 +74,24 @@ public class AuthService {
     }
 
     private String createAndReturnToken(User user, HttpServletResponse response){
-        // 토큰 만료 시간
-        int ACCESS_TOKEN_TIME = 60 * 60 * 1000;        // 60분
-        int REFRESH_TOKEN_TIME = 24 * 60 * 60 * 1000;  // 1일
-
         String accessToken = JwtUtil.createJWT(user, ACCESS_TOKEN_TIME);
         String refreshToken = JwtUtil.createJWT(user, REFRESH_TOKEN_TIME);
 
         CookieUtils.addCookie(response,"refreshToken", refreshToken, REFRESH_TOKEN_TIME);
 
         return accessToken;
+    }
+
+    public String getAccessTokenFromRefreshToken(String refreshToken) {
+        // refreshToken 에서 Claims 추출
+        Claims claims = JwtUtil.getUserInfoFromToken(refreshToken);
+
+        // Claims 에서 이메일 추출
+        String email = claims.get("email", String.class);
+
+        // 이메일을 사용하여 사용자 정보 가져오기
+        User user = userRepository.findByEmail(email);
+
+        return JwtUtil.createJWT(user, ACCESS_TOKEN_TIME);
     }
 }

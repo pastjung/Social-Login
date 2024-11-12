@@ -23,4 +23,9 @@ public class AuthController {
         String redirectUrl = SOCIAL_LOGIN_REDIRECT_URL + "?accessToken=" + accessToken;
         response.sendRedirect(redirectUrl);
     }
+
+    @GetMapping("/token")
+    public String getAccessTokenFromRefreshToken(@CookieValue(value = "refreshToken") String refreshToken) {
+        return authService.getAccessTokenFromRefreshToken(refreshToken);
+    }
 }
