@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     Dotenv dotenv = Dotenv.load();
-    private final String reactURL = "http://localhost:" + dotenv.get("REACT_HOST_PORT");
+    private final String reactURL = "http://" + dotenv.get("IP_ADDRESS") + ":" + dotenv.get("REACT_HOST_PORT");
 
     @GetMapping("/hello")
     public String sayHello() {

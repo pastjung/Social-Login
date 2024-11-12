@@ -11,10 +11,8 @@ import com.inha.springbootapp.global.util.CookieUtils;
 import com.inha.springbootapp.global.util.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-@Slf4j(topic = "Social Login")
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -25,7 +23,6 @@ public class AuthService {
     private final GoogleAuthUtil googleAuthUtil;
 
     public String callback(String loginType, String code, HttpServletResponse response) throws JsonProcessingException {
-        log.info("callback start!");
 
         String accessToken;
         SocialLoginUserDto userInfoResponse;
@@ -78,8 +75,6 @@ public class AuthService {
 
         String accessToken = JwtUtil.createJWT(user, ACCESS_TOKEN_TIME);
         String refreshToken = JwtUtil.createJWT(user, REFRESH_TOKEN_TIME);
-        log.info("accessToken: {}", accessToken);
-        log.info("refreshToken: {}", refreshToken);
 
         CookieUtils.addCookie(response,"refreshToken", refreshToken, REFRESH_TOKEN_TIME);
 
