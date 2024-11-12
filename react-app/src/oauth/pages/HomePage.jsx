@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchUserInfo } from '../apis/fetchUserInfo';
 import PingSpringboot from '../buttons/PingAccessToken';
+import Logout from '../buttons/Logout';
 import accessToken from '../accessToken';
 
 const HomePage = () => {
@@ -36,6 +37,7 @@ const HomePage = () => {
                     <p>로그인 유형: {userInfo.loginType}</p>
                     <p>소셜로그인 ID: {userInfo.socialLoginId}</p>
                     <PingSpringboot />
+                    <Logout />
                 </div>
             ) : (
                 <p>사용자 정보가 없습니다. 로그인해주세요.</p>
