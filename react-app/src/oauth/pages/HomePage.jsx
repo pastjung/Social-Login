@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { fetchUserInfo } from '../apis/fetchUserInfo';
 import PingSpringboot from '../buttons/PingAccessToken';
+import accessToken from '../accessToken';
 
 const HomePage = () => {
     const [userInfo, setUserInfo] = useState(null);     // 사용자 정보를 저장하는 상태: 초기값 = null
     const [loading, setLoading] = useState(true);       // 데이터 로딩 상태를 관리하는 상태: 초기값 = true
 
     useEffect(() => {
+        const token = accessToken.getToken();
+
         const callAPI = async () => {
-            const params = new URLSearchParams(location.search);
-            const accessToken = params.get('accessToken');  // 쿼리 파라미터에서 accessToken 가져오기
-
-            if (!accessToken) {
-                console.error('Access token is required');
-                setLoading(false);
-                return;
-            }
-
             try {
-                const data = await fetchUserInfo(accessToken);  // 분리된 함수 호출
+                const data = await fetchUserInfo(token);  // 분리된 함수 호출
                 setUserInfo(data);
             } catch (error) {
                 console.error(error);
